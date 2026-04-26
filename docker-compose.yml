@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: cardekho-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: cardekho_agent
+
+  agentos:
+    build:
+      context: ./apps/agentos
+      dockerfile: Dockerfile
+    container_name: cardekho-agentos
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongo:27017
+      - PORT=8000
+    env_file:
+      - ./apps/agentos/.env
+    depends_on:
+      - mongo
+    volumes:
+      - ./apps/agentos:/app
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  mongo_data:

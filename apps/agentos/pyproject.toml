@@ -1,0 +1,25 @@
+[project]
+name = "cardekho-agentos"
+version = "0.1.0"
+description = "CarDekho Agent - Multi-agent car recommendation backend"
+requires-python = ">=3.10"
+dependencies = [
+    "agno[os]>=2.5.3",
+    "anthropic>=0.51.0",
+    "pymongo[srv]>=4.7.0",
+    "motor>=3.5.0",
+    "exa-py>=1.7.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.28.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
